@@ -1,0 +1,38 @@
+
+homeassistant:
+  legacy_templates: false
+  name: Home
+  latitude: !env_var HASS_LATITUDE 
+  longitude: !env_var HASS_LONGITUDE 
+  elevation: !env_var HASS_ELEVATION
+  unit_system: metric
+  time_zone: !env_var TZ
+
+  external_url: !env_var HASS_EXTERNAL_URL
+  internal_url: !env_var HASS_INTERNAL_URL
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.168.0.0/24
+    - 10.42.0.0/16
+    - 10.43.0.0/16
+    - 10.8.0.0/24
+
+recorder:
+  db_url: !env_var HASS_POSTGRES_CONNECTION_STRING
+  
+  # The number of days of history to keep in the recorder database
+  # purge_keep_days: 32
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
