@@ -11,6 +11,8 @@ homeassistant:
   external_url: !env_var HASS_EXTERNAL_URL
   internal_url: !env_var HASS_INTERNAL_URL
 
+  packages: !include_dir_named packages
+
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 

@@ -1,0 +1,16 @@
+sensor:
+  # Convert power (W) to energy (kWh) 
+  - platform: integration
+    source: sensor.pzem_017_power
+    name: panel_energy_produced
+    unit_prefix: k
+    round: 2
+    method: left
+
+utility_meter:
+  daily_panel_energy_produced:
+    source: sensor.panel_energy_produced
+    cycle: daily
+  monthly_panel_energy_produced:
+    source: sensor.panel_energy_produced
+    cycle: monthly
